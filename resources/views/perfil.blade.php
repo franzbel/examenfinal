@@ -1,4 +1,20 @@
 @extends('app')
+@section('estilo')
+    <style>
+        .setWidth {
+            max-width: 900px;
+        }
+        .concat div { overflow: auto;
+            -ms-text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            white-space: normal;
+            width: inherit;
+            height: 40px;
+            padding-right: 25px;;
+        }
+    </style>
+@endsection
 
 <div class="fondoguest">
 </div>
@@ -13,40 +29,64 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
 
-                    <h1>SOLO MIS POSTS</h1>
+
                     @if($user->id != Auth::id() && Auth::check())
                         @include('partials.seguir')
                     @endif
 
-
-
                      <div class="panel-heading"><h1>Bienvenido a la pagina de {{$user->name}}</h1></div>
-                    <button class="btn btn-danger btn-sm">Seguir</button>
 
                     <div class="panel-body">
                         {!! Form::open(array('route' => 'posts.store', 'method'=>'post')) !!}
                         {!! Form::hidden('user_id',  Auth::id()) !!}
                         <div class="form-group">
-                            {!! Form::textarea('texto',null, ['class'=>'form-control']) !!}
+                            {!! Form::textarea('texto',null, ['class'=>'form-control', 'maxlength'=>140, 'rows'=>2]) !!}
                         </div>
                         <button type="submit" class="btn btn-success">Postear</button>
                         {!! Form::close() !!}
                         <h2>Posts</h2>
-                        @foreach(App\User::find(Auth::id())->first()->posts as $post)
-                        <div class="panel panel-success">
-                        <div class="panel-heading">{{$post->created_at}}</div>
-                            <div class="panel-body">
-                            <h3 class="form-control">{{$post->texto}}</h3>
-                            <h4>Likes: {{$post->likes->count()}}</h4>
-                            </div>
-                            <div class="panel-footer">
-                                  {!! Form::open(['url'=>'likes']) !!}
-                                  {!! Form::hidden('post_id', $post->id) !!}
-                                  {!! Form::submit('Me gusta',['class' => 'btn btn-primary active']) !!}
-                                  {!! Form::close() !!}
-                              </div>
-                            </div>     
-                            @endforeach
+
+                        <table class="table-striped table-hover">
+                            <tbody>
+                                @foreach(App\User::find($user->id)->posts as $post)
+                                    <tr>
+                                        <th>{{$post->created_at}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="setWidth concat" ><div>{{$post->texto}}</div></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Likes: {{$post->likes->count()}}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {!! Form::open(['url'=>'likes']) !!}
+                                            {!! Form::hidden('post_id', $post->id) !!}
+                                            {!! Form::submit('Me gusta',['class' => 'btn btn-primary active']) !!}
+                                            {!! Form::close() !!}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><hr/></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{--<div class="panel panel-success">--}}
+                        {{--<div class="panel-heading">{{$post->created_at}}</div>--}}
+                            {{--<div class="panel-body">--}}
+                            {{--<h3 class="form-control">{{$post->texto}}</h3>--}}
+                            {{--<h4>Likes: {{$post->likes->count()}}</h4>--}}
+                            {{--</div>--}}
+                            {{--<div class="panel-footer">--}}
+                                  {{--{!! Form::open(['url'=>'likes']) !!}--}}
+                                  {{--{!! Form::hidden('post_id', $post->id) !!}--}}
+                                  {{--{!! Form::submit('Me gusta',['class' => 'btn btn-primary active']) !!}--}}
+                                  {{--{!! Form::close() !!}--}}
+                              {{--</div>--}}
+                            {{--</div>--}}
+
             </div>
         </div>
     </div>

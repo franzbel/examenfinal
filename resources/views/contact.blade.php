@@ -1,25 +1,20 @@
 @extends('app')
-
-
-{{--@section('content')--}}
-{{--<h1>TODOS LOS POSTS</h1>--}}
-{{--{!! Form::open(array('route' => 'posts.store', 'method'=>'post')) !!}--}}
-{{--@include('movies.partials.form')--}}
-
-{{--{!! Form::hidden('user_id',  Auth::id()) !!}--}}
-{{--<div class="form-group">--}}
-{{--{!! Form::textarea('texto',null, ['class'=>'form-control']) !!}--}}
-{{--</div>--}}
-
-{{--<button type="submit" class="btn btn-info">Postear</button>--}}
-{{--{!! Form::close() !!}--}}
-
-
-{{--<div class="fondoguest">--}}
-{{--<p>{{$mensaje}}</p>--}}
-{{--</div>--}}
-{{--<p>comoe es </p>--}}
-{{--@stop--}}
+@section('estilo')
+    <style>
+        .setWidth {
+            max-width: 900px;
+        }
+        .concat div { overflow: auto;
+            -ms-text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            white-space: normal;
+            width: inherit;
+            height: 40px;
+            padding-right: 25px;;
+        }
+    </style>
+@endsection
 
 @section('content')
 
@@ -33,40 +28,74 @@
 
 
                         {!! Form::open(array('route' => 'posts.store', 'method'=>'post')) !!}
-                        {!! Form::hidden('user_id',  Auth::id()) !!}
-                        <div class="form-group">
-                            {!! Form::textarea('texto',null, ['class'=>'form-control']) !!}
-                        </div>
-                        <button type="submit" class="btn btn-info">Postear</button>
-                        </br> </br>
+                            {!! Form::hidden('user_id',  Auth::id()) !!}
+                            <div class="form-group">
+                                {!! Form::textarea('texto',null, ['class'=>'form-control', 'maxlength'=>140, 'rows'=>2]) !!}
+                            </div>
+                            <button type="submit" class="btn btn-info">Postear</button>
                         {!! Form::close() !!}
-                            @foreach(App\User::find(Auth::id())->first()->posts as $post)
-                                <div class="panel panel-warning">
-                                <div class="panel-heading">{{$post->user->username}} fecha de creacion: {{$post->created_at}}</div>
-                                    <div class="panel-body">
-                                    <h3 class="form-control">{{$post->texto}}</h3>
-                                    <h4>Likes: {{$post->likes->count()}}</h4>
-                                    </div>
-                                    <div class="panel-footer">
-                                    {!! Form::open(['url'=>'likes']) !!}
-                                    {!! Form::hidden('post_id', $post->id) !!}
-                                    {!! Form::submit('Me gusta',['class' => 'btn btn-success btn-sm']) !!}
-                                    {!! Form::close() !!}
-                                    </div>
-                                    </div>
-                            @endforeach
 
                         <table class="table-striped table-hover">
-                            <thead>
-                            <tr >
-                                <th>Posts de las personas que sigo</th>
-                                <th></th>
-                            </tr>
-                            </thead>
                             <tbody>
-                            @foreach(App\User::find(Auth::id())->idols as $idolo)
-                          
+                            @foreach(App\User::find(Auth::id())->posts as $post)
+
+                                <tr>
+                                    <th>{{$post->created_at}}</th>
+                                </tr>
+                                <tr>
+                                    <td class="setWidth concat" ><div>{{$post->texto}}</div></td>
+                                </tr>
+                                <tr>
+                                    <td>Likes: {{$post->likes->count()}}</td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {!! Form::open(['url'=>'likes']) !!}
+                                        {!! Form::hidden('post_id', $post->id) !!}
+                                        {!! Form::submit('Me gusta',['class' => 'btn btn-primary active']) !!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><hr/></td>
+                                </tr>
                             @endforeach
+
+                            @foreach(App\User::find(Auth::id())->idols as $idolo)
+                                @foreach(App\User::find($idolo->user_id)->posts as $post)
+
+                                    <tr>
+                                        <th>{{$post->created_at}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="setWidth concat" ><div>{{$post->texto}}</div></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Likes: {{$post->likes->count()}}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {!! Form::open(['url'=>'likes']) !!}
+                                            {!! Form::hidden('post_id', $post->id) !!}
+                                            {!! Form::submit('Me gusta',['class' => 'btn btn-primary active']) !!}
+                                            {!! Form::close() !!}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><hr/></td>
+                                    </tr>
+                                @endforeach
+
+                            @endforeach
+
+
+                            </tbody>
+                        </table>
+
+
+              
 
 
                             </tbody>
