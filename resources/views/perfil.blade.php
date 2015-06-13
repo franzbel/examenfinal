@@ -12,17 +12,26 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
                     <h1>SOLO MIS POSTS</h1>
                     @if($user->id != Auth::id() && Auth::check())
                         @include('partials.seguir')
                     @endif
+<<<<<<< Updated upstream
 
 
 
                      <div class="panel-heading"><h1>Bienvenido a la pagina de {{$user->name}}</h1></div>
                     <button class="btn btn-danger btn-sm">Seguir</button>
 
+=======
+                    <div class="panel-heading">Pagina de: {{$user->name}}</div>
+                     <div class="panel-heading"><h1>Bienvenido a la pagina de {{$user->name}}</h1></div>
+                    <button class="btn btn-danger btn-sm">Seguir</button>
+>>>>>>> Stashed changes
                     <div class="panel-body">
                         {!! Form::open(array('route' => 'posts.store', 'method'=>'post')) !!}
                         {!! Form::hidden('user_id',  Auth::id()) !!}

@@ -55,7 +55,10 @@
                                     </div>
                                     </div>
                             @endforeach
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
                         <table class="table-striped table-hover">
                             <thead>
                             <tr >
