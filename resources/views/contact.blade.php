@@ -38,25 +38,22 @@
                             {!! Form::textarea('texto',null, ['class'=>'form-control']) !!}
                         </div>
                         <button type="submit" class="btn btn-info">Postear</button>
+                        </br> </br>
                         {!! Form::close() !!}
-
-                        <table class="table-striped table-hover">
-                            <thead>
-                            <tr >
-                                <th>Posts</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
                             @foreach(App\User::find(Auth::id())->first()->posts as $post)
-                                <tr>
-                                    <td>{{$post->texto}}</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td><button class="btn btn-info btn-sm">Repostear</button></td>
-                                    <td><button class="btn btn-info btn-sm">Me gusta</button></td>
-                                </tr>
+                                <div class="panel panel-warning">
+                                <div class="panel-heading">{{$post->user->username}} fecha de creacion: {{$post->created_at}}</div>
+                                    <div class="panel-body">
+                                    <h3 class="form-control">{{$post->texto}}</h3>
+                                    <h4>Likes: {{$post->likes->count()}}</h4>
+                                    </div>
+                                    <div class="panel-footer">
+                                    {!! Form::open(['url'=>'likes']) !!}
+                                    {!! Form::hidden('post_id', $post->id) !!}
+                                    {!! Form::submit('Me gusta',['class' => 'btn btn-success btn-sm']) !!}
+                                    {!! Form::close() !!}
+                                    </div>
+                                    </div>
                             @endforeach
 
 
@@ -82,9 +79,12 @@
                     </div>
 
                 </div>
+
             </div>
         </div>
     </div>
 
 @endsection
+
+    
 

@@ -12,46 +12,41 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
+<<<<<<< HEAD
                     <h1>SOLO MIS POSTS</h1>
                     @if($user->id != Auth::id() && Auth::check())
                         @include('partials.seguir')
                     @endif
 
                     <div class="panel-heading">Pagina de: {{$user->name}}</div>
+=======
+                     <div class="panel-heading"><h1>Bienvenido a la pagina de {{$user->name}}</h1></div>
+                    <button class="btn btn-danger btn-sm">Seguir</button>
+>>>>>>> 11d7ece20301792ba9d9d89d59109684c2411244
                     <div class="panel-body">
-
-
                         {!! Form::open(array('route' => 'posts.store', 'method'=>'post')) !!}
                         {!! Form::hidden('user_id',  Auth::id()) !!}
                         <div class="form-group">
                             {!! Form::textarea('texto',null, ['class'=>'form-control']) !!}
                         </div>
-                        <button type="submit" class="btn btn-info">Postear</button>
+                        <button type="submit" class="btn btn-success">Postear</button>
                         {!! Form::close() !!}
-
-                        <table class="table-striped table-hover">
-                            <thead>
-                            <tr >
-                                <th>Posts</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach(App\User::find(Auth::id())->first()->posts as $post)
-                                <tr>
-                                    <td>{{$post->texto}}</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td><button class="btn btn-info btn-sm">Repostear</button></td>
-                                    <td><button class="btn btn-info btn-sm">Me gusta</button></td>
-                                </tr>
+                        <h2>Posts</h2>
+                        @foreach(App\User::find(Auth::id())->first()->posts as $post)
+                        <div class="panel panel-success">
+                        <div class="panel-heading">{{$post->created_at}}</div>
+                            <div class="panel-body">
+                            <h3 class="form-control">{{$post->texto}}</h2>
+                            <h4>Likes: {{$post->likes->count()}}</h4>
+                            </div>
+                            <div class="panel-footer">
+                                  {!! Form::open(['url'=>'likes']) !!}
+                                  {!! Form::hidden('post_id', $post->id) !!}
+                                  {!! Form::submit('Me gusta',['class' => 'btn btn-primary active']) !!}
+                                  {!! Form::close() !!}
+                              </div>
+                            </div>     
                             @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
             </div>
         </div>
     </div>
