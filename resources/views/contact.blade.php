@@ -28,7 +28,7 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <h1>TODOS LOS POSTS</h1>
-                    <button class="btn btn-info btn-sm">Seguir</button>
+
                     <div class="panel-body">
 
 
@@ -58,8 +58,27 @@
                                     <td><button class="btn btn-info btn-sm">Me gusta</button></td>
                                 </tr>
                             @endforeach
+
+
                             </tbody>
                         </table>
+
+                        <table class="table-striped table-hover">
+                            <thead>
+                            <tr >
+                                <th>Posts de las personas que sigo</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach(App\User::find(Auth::id())->idols as $idolo)
+                          
+                            @endforeach
+
+
+                            </tbody>
+                        </table>
+
                     </div>
 
                 </div>

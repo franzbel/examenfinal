@@ -17,6 +17,7 @@ Route::get('/{id}', function ($id) {
    		 $users = \DB::table('users')->where('username' ,$id)->get();
 		return view('perfil',compact('users'));
 });
+
 Route::resource('articles','ArticlesController');
 Route::resource('movies','MoviesController');
 Route::resource('reviews','ReviewsController');
@@ -27,3 +28,6 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::resource('idols','IdolsController',
+    ['only'=>['store']]);

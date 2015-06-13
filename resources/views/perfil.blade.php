@@ -13,8 +13,11 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <h1>SOLO MIS POSTS</h1>
-                    <button class="btn btn-info btn-sm">Seguir</button>
-                    <div class="panel-heading">Bienvenido {{$user->name}}</div>
+                    @if($user->id != Auth::id() && Auth::check())
+                        @include('partials.seguir')
+                    @endif
+
+                    <div class="panel-heading">Pagina de: {{$user->name}}</div>
                     <div class="panel-body">
 
 
