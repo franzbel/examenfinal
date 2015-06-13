@@ -18,9 +18,15 @@ Route::get('/{id}', function ($id) {
 		return view('perfil',compact('users'));
 });
 
-Route::resource('articles','ArticlesController');
-Route::resource('movies','MoviesController');
-Route::resource('reviews','ReviewsController');
+
+Route::resource('answers','AnswersController');
+
+
+//Route::resource('articles','ArticlesController');
+
+//Route::resource('articles','ArticlesController');
+//Route::resource('movies','MoviesController');
+//Route::resource('reviews','ReviewsController');
 Route::resource('likes','LikesController');
 Route::resource('ratings','RatingsController');
 Route::resource('posts','PostsController');

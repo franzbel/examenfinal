@@ -29,6 +29,18 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
 
+
+                    <div>Numero de posts: {{App\User::find(Auth::id())->posts->count()}}</div>
+                    <div>Numero de seguidores: {{App\Idol::where('idol_id', Auth::id())->count()}}</div>
+                    <div>Siguiendo a: {{App\User::find(Auth::id())->idols->count()}} </div>
+                    <hr/>
+                    <a  class="btn btn-danger btn-sm" href="{{route('answers.show',App\User::find(Auth::id()))}}">Sigo a...</a>
+                    <hr/>
+                    <a  class="btn btn-danger btn-sm" href="{{route('answers.edit',App\User::find(Auth::id()))}}">Seguidores</a>
+                    <hr/>
+
+
+
                     @if($user->id != Auth::id() && Auth::check())
                         @include('partials.seguir')
                     @endif

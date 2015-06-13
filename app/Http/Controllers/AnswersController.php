@@ -2,10 +2,12 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
 use App\Idol;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
-class IdolsController extends Controller {
+class AnswersController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -14,7 +16,7 @@ class IdolsController extends Controller {
 	 */
 	public function index()
 	{
-		//
+
 	}
 
 	/**
@@ -32,11 +34,9 @@ class IdolsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store()
 	{
-        $idolo = new Idol($request->all());
-        $idolo->save();
-        return (redirect()->back());
+		//
 	}
 
 	/**
@@ -48,6 +48,9 @@ class IdolsController extends Controller {
 	public function show($id)
 	{
 
+        $sigo_a = User::find($id)->idols;
+
+        return view('siguiendo_a', compact('sigo_a'));
 	}
 
 	/**
@@ -58,7 +61,8 @@ class IdolsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+        $seguidores = User::find($id)->idols;
+        return view('mis_seguidores', compact('seguidores'));
 	}
 
 	/**
