@@ -44,18 +44,21 @@
                             <thead>
                             <tr >
                                 <th>Posts</th>
-                                <th></th>
+                                <th>Likes:</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach(App\User::find(Auth::id())->first()->posts as $post)
                                 <tr>
                                     <td>{{$post->texto}}</td>
-                                    <td></td>
+                                    <td>{{$post->likes->count()}}</td>
                                 </tr>
                                 <tr>
                                     <td><button class="btn btn-info btn-sm">Repostear</button></td>
-                                    <td><button class="btn btn-info btn-sm">Me gusta</button></td>
+                                    {!! Form::open(['url'=>'likes']) !!}
+                                    {!! Form::hidden('post_id', $post->id) !!}
+                                    <td>{!! Form::submit('Me gusta',['class' => 'btn btn-info btn-sm']) !!}</td>
+                                    {!! Form::close() !!}
                                 </tr>
                             @endforeach
                             </tbody>
