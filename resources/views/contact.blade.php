@@ -56,10 +56,6 @@
                                     </div>
                             @endforeach
 
-
-                            </tbody>
-                        </table>
-
                         <table class="table-striped table-hover">
                             <thead>
                             <tr >

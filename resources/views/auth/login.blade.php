@@ -1,4 +1,15 @@
 @extends('app')
+@section('estilo')
+
+    <style>
+        body{
+            background-image: url('/rino.jpg');
+            background-size: cover;
+            background-repeat: repeat;
+        }
+    </style>
+@endsection
+
 
 @section('content')
 <div id="iniciar_secion">
