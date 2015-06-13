@@ -29,12 +29,14 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
 
-
                     @if($user->id != Auth::id() && Auth::check())
                         @include('partials.seguir')
                     @endif
 
                      <div class="panel-heading"><h1>Bienvenido a la pagina de {{$user->name}}</h1></div>
+
+
+
 
                     <div class="panel-body">
                         {!! Form::open(array('route' => 'posts.store', 'method'=>'post')) !!}
