@@ -73,22 +73,10 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{--<div class="panel panel-success">--}}
-                        {{--<div class="panel-heading">{{$post->created_at}}</div>--}}
-                            {{--<div class="panel-body">--}}
-                            {{--<h3 class="form-control">{{$post->texto}}</h3>--}}
-                            {{--<h4>Likes: {{$post->likes->count()}}</h4>--}}
-                            {{--</div>--}}
-                            {{--<div class="panel-footer">--}}
-                                  {{--{!! Form::open(['url'=>'likes']) !!}--}}
-                                  {{--{!! Form::hidden('post_id', $post->id) !!}--}}
-                                  {{--{!! Form::submit('Me gusta',['class' => 'btn btn-primary active']) !!}--}}
-                                  {{--{!! Form::close() !!}--}}
-                              {{--</div>--}}
-                            {{--</div>--}}
 
+                </div>
             </div>
         </div>
     </div>
-
+</div>
 @endsection
