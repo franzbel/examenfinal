@@ -63,7 +63,7 @@
                             @endforeach
 
                             @foreach(App\User::find(Auth::id())->idols as $idolo)
-                                @foreach(App\User::find($idolo->user_id)->posts as $post)
+                                @foreach(App\User::find($idolo->idol_id)->posts as $post)
 
                                     <tr>
                                         <th>{{$post->created_at}}</th>

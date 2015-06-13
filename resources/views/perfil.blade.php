@@ -35,17 +35,17 @@
 
                      <div class="panel-heading"><h1>Bienvenido a la pagina de {{$user->name}}</h1></div>
 
-
-
-
                     <div class="panel-body">
-                        {!! Form::open(array('route' => 'posts.store', 'method'=>'post')) !!}
-                        {!! Form::hidden('user_id',  Auth::id()) !!}
-                        <div class="form-group">
-                            {!! Form::textarea('texto',null, ['class'=>'form-control', 'maxlength'=>140, 'rows'=>2]) !!}
-                        </div>
-                        <button type="submit" class="btn btn-success">Postear</button>
-                        {!! Form::close() !!}
+                        @if(Auth::check())
+                            {!! Form::open(array('route' => 'posts.store', 'method'=>'post')) !!}
+                            {!! Form::hidden('user_id',  Auth::id()) !!}
+                            <div class="form-group">
+                                {!! Form::textarea('texto',null, ['class'=>'form-control', 'maxlength'=>140, 'rows'=>2]) !!}
+                            </div>
+                            <button type="submit" class="btn btn-success">Postear</button>
+                            {!! Form::close() !!}
+                        @endif
+
                         <h2>Posts</h2>
 
                         <table class="table-striped table-hover">
