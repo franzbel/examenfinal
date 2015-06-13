@@ -10,6 +10,24 @@ body {
             background-size: cover;
             background-repeat: repeat;
 }
+        #iniciar_secion, #registrarse{
+            width: 350px;
+            /*height: 360px;*/
+            margin-top: 5%;
+            margin-right: 5%;
+            padding: 15px;
+            border-radius: 12px;
+            opacity: 0.8;
+
+        }
+        #iniciar_secion{
+            background-image: url("rino.jpg");
+            background-size: cover;
+            background-repeat: repeat;
+            float: right;
+            background-color: #c7ddef;
+
+        }
 article,
 aside,
 details,

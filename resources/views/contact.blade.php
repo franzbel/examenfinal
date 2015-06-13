@@ -28,7 +28,7 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <h1>TODOS LOS POSTS</h1>
-                    <button class="btn btn-info btn-sm">Seguir</button>
+                    <button class="btn btn-danger btn-sm">Seguir</button>
                     <div class="panel-body">
 
 
@@ -38,37 +38,29 @@
                             {!! Form::textarea('texto',null, ['class'=>'form-control']) !!}
                         </div>
                         <button type="submit" class="btn btn-info">Postear</button>
+                        </br> </br>
                         {!! Form::close() !!}
-
-                        <table class="table-striped table-hover">
-                            <thead>
-                            <tr >
-                                <th>Posts</th>
-                                <th>Likes:</th>
-                            </tr>
-                            </thead>
-                            <tbody>
                             @foreach(App\User::find(Auth::id())->first()->posts as $post)
-                                <tr>
-                                    <td>{{$post->texto}}</td>
-                                    <td>{{$post->likes->count()}}</td>
-                                </tr>
-                                <tr>
-                                    <td><button class="btn btn-info btn-sm">Repostear</button></td>
+                                <div class="panel panel-warning">
+                                <div class="panel-heading">{{$post->user->username}} fecha de creacion: {{$post->created_at}}</div>
+                                    <div class="panel-body">
+                                    <h3 class="form-control">{{$post->texto}}</h3>
+                                    <h4>Likes: {{$post->likes->count()}}</h4>
+                                    </div>
+                                    <div class="panel-footer">
                                     {!! Form::open(['url'=>'likes']) !!}
                                     {!! Form::hidden('post_id', $post->id) !!}
-                                    <td>{!! Form::submit('Me gusta',['class' => 'btn btn-info btn-sm']) !!}</td>
+                                    {!! Form::submit('Me gusta',['class' => 'btn btn-success btn-sm']) !!}
                                     {!! Form::close() !!}
-                                </tr>
+                                    </div>
+                                    </div>
                             @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
+ 
             </div>
         </div>
     </div>
 
 @endsection
+
+    
 
